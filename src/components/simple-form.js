@@ -13,17 +13,23 @@ const formValidationScheme = Yup.object({
 });
 
 function SimpleForm() {
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+  };
   const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-    },
+    initialValues: initialValues,
     onSubmit: (values) => {
+      console.log(JSON.stringify(values, null, 2));
+    },
+    handleSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
     },
     validationSchema: formValidationScheme,
   });
+
+  console.log({ formik });
 
   return (
     <div>
@@ -44,6 +50,7 @@ function SimpleForm() {
               type="text"
               placeholder="First Name"
               value={formik.values.firstName}
+              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
             {formik.touched.firstName && formik.errors.firstName ? (
@@ -66,6 +73,7 @@ function SimpleForm() {
               type="text"
               placeholder="Last Name"
               value={formik.values.lastName}
+              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
             {formik.touched.lastName && formik.errors.lastName ? (
@@ -88,6 +96,7 @@ function SimpleForm() {
               type="email"
               placeholder="Email"
               value={formik.values.email}
+              onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
             {formik.touched.email && formik.errors.email ? (
