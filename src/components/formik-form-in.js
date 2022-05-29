@@ -13,6 +13,17 @@ const formValidationScheme = Yup.object({
     .required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
   address: Yup.string().required("Required"),
+  social: Yup.object().shape({
+    twitter: Yup.string()
+      .required("Required")
+      .max(15, "Must be 15 characters or less"),
+    facebook: Yup.string()
+      .required("Required")
+      .max(15, "Must be 15 characters or less"),
+  }),
+  // phoneNumbers: Yup.array().of(
+  //   Yup.number().required("Required").max(10, "Must be 10 digits or less")
+  // ),
 });
 
 function FormikFormIn() {
@@ -25,6 +36,7 @@ function FormikFormIn() {
       twitter: "",
       facebook: "",
     },
+    phoneNumbers: ["", ""],
   };
 
   const onSubmit = (values) => {
@@ -147,6 +159,106 @@ function FormikFormIn() {
                     );
                   }}
                 </Field>
+              </div>
+
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="twitter"
+                >
+                  Twitter
+                </label>
+                <Field
+                  type="text"
+                  name="social.twitter"
+                  placeholder="Twitter"
+                  className={`shadow border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                    touched.social?.twitter &&
+                    errors.social?.twitter &&
+                    "border-red-500"
+                  }`}
+                />
+                <ErrorMessage
+                  name="social.twitter"
+                  component="p"
+                  className="text-red-500 text-xs italic"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="facebook"
+                >
+                  Facebook
+                </label>
+                <Field
+                  type="text"
+                  name="social.facebook"
+                  placeholder="Facebook"
+                  className={`shadow border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                    touched.social?.facebook &&
+                    errors.social?.facebook &&
+                    "border-red-500"
+                  }`}
+                />
+                <ErrorMessage
+                  name="social.facebook"
+                  component="p"
+                  className="text-red-500 text-xs italic"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="primaryPhone"
+                >
+                  Primary Phone Number
+                </label>
+                <Field
+                  type="text"
+                  name="phoneNumbers[0]"
+                  placeholder="Primary Phone Number"
+                  className={`shadow border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                    touched.phoneNumbers &&
+                    touched.phoneNumbers[0] &&
+                    errors.phoneNumbers &&
+                    errors.phoneNumbers[0] &&
+                    "border-red-500"
+                  }`}
+                />
+                {/* <ErrorMessage
+                  name="phoneNumbers[0]"
+                  component="p"
+                  className="text-red-500 text-xs italic"
+                /> */}
+              </div>
+
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="primaryPhone"
+                >
+                  Secondary Phone Number
+                </label>
+                <Field
+                  type="text"
+                  name="phoneNumbers[1]"
+                  placeholder="Primary Phone Number"
+                  className={`shadow border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                    touched.phoneNumbers &&
+                    touched.phoneNumbers[0] &&
+                    errors.phoneNumbers &&
+                    errors.phoneNumbers[0] &&
+                    "border-red-500"
+                  }`}
+                />
+                {/* <ErrorMessage
+                  name="phoneNumbers[1]"
+                  component="p"
+                  className="text-red-500 text-xs italic"
+                /> */}
               </div>
 
               <div className="flex items-center justify-between">
