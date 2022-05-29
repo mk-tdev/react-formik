@@ -1,7 +1,8 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, Field, ErrorMessage } from "formik";
 
 import * as Yup from "yup";
+import TextErrorMessage from "./textErrorMessage";
 
 const formValidationScheme = Yup.object({
   firstName: Yup.string()
@@ -11,6 +12,7 @@ const formValidationScheme = Yup.object({
     .max(10, "Must be 10 characters or less")
     .required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
+  address: Yup.string().required("Required"),
 });
 
 function FormikFormIn() {
@@ -18,6 +20,11 @@ function FormikFormIn() {
     firstName: "",
     lastName: "",
     email: "",
+    address: "",
+    social: {
+      twitter: "",
+      facebook: "",
+    },
   };
 
   const onSubmit = (values) => {
@@ -39,8 +46,6 @@ function FormikFormIn() {
             values,
             errors,
             touched,
-            handleChange,
-            handleBlur,
             handleSubmit,
             handleReset,
             getFieldProps,
@@ -53,20 +58,20 @@ function FormikFormIn() {
                 >
                   First Name
                 </label>
-                <input
-                  className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                <Field
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  className={`shadow border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                     touched.firstName && errors.firstName && "border-red-500"
                   }`}
-                  id="firstName"
-                  type="text"
-                  placeholder="First Name"
-                  {...getFieldProps("firstName")}
                 />
-                {touched.firstName && errors.firstName ? (
-                  <p className="text-red-500 text-xs italic">
-                    {errors.firstName}
-                  </p>
-                ) : null}
+
+                <ErrorMessage
+                  name="firstName"
+                  component="p"
+                  className="text-red-500 text-xs italic"
+                />
               </div>
 
               <div className="mb-4">
@@ -76,18 +81,24 @@ function FormikFormIn() {
                 >
                   Last Name
                 </label>
-                <input
-                  className="shadow border w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outlin"
-                  id="lastName"
+                <Field
                   type="text"
+                  name="lastName"
                   placeholder="Last Name"
-                  {...getFieldProps("lastName")}
+                  className={`shadow border w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                    touched.lastName && errors.lastName && "border-red-500"
+                  }`}
                 />
-                {touched.lastName && errors.lastName ? (
-                  <p className="text-red-500 text-xs italic">
-                    {errors.lastName}
-                  </p>
-                ) : null}
+
+                {/* <ErrorMessage name="lastName" >
+                  {(msg) => <TextErrorMessage>{msg}</TextErrorMessage>}
+                </ErrorMessage> */}
+
+                <ErrorMessage
+                  name="lastName"
+                  component={TextErrorMessage}
+                  className="text-red-500 text-xs italic"
+                />
               </div>
 
               <div className="mb-4">
@@ -107,6 +118,35 @@ function FormikFormIn() {
                 {touched.email && errors.email ? (
                   <p className="text-red-500 text-xs italic">{errors.email}</p>
                 ) : null}
+              </div>
+
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="address"
+                >
+                  Address
+                </label>
+                <Field name="address">
+                  {({ field, meta }) => {
+                    return (
+                      <div>
+                        <input
+                          className="shadow border w-full py-2 px-3 text-gray-700 focus:outline-none focus:shadow-outline"
+                          id="address"
+                          type="text"
+                          placeholder="Address"
+                          {...field}
+                        />
+                        {meta.touched && meta.error ? (
+                          <p className="text-red-500 text-xs italic">
+                            {meta.error}
+                          </p>
+                        ) : null}
+                      </div>
+                    );
+                  }}
+                </Field>
               </div>
 
               <div className="flex items-center justify-between">
