@@ -3,6 +3,7 @@ import { Formik, Field, ErrorMessage } from "formik";
 
 import * as Yup from "yup";
 import TextErrorMessage from "./textErrorMessage";
+import FormListener from "./formListener";
 
 const formValidationScheme = Yup.object({
   firstName: Yup.string()
@@ -281,6 +282,7 @@ function FormikFormIn() {
               <div>Values: {JSON.stringify(values, null, 2)}</div>
               <div>Touch: {JSON.stringify(touched, null, 2)}</div>
               <div>Errors: {JSON.stringify(errors, null, 2)}</div>
+              <FormListener />
             </form>
           )}
         </Formik>
