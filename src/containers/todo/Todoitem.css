@@ -1,0 +1,45 @@
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+  gap: 10px;
+  border: 1px solid #e8f9fd;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.todo-item.done {
+  border-left: #069a8e 5px solid;
+}
+.todo-item.not-done {
+  border-left: #eb5353 5px solid;
+}
+.sub-text {
+  display: flex;
+  font-size: 13px;
+  color: gray;
+}
+button.toggle {
+  padding: 8px 10px;
+  border: 0;
+  background-color: #79dae8;
+  color: white;
+  cursor: pointer;
+}
+button.remove {
+  padding: 8px 10px;
+  border: 0;
+  background-color: #eb5353;
+  color: white;
+  cursor: pointer;
+}
+.todo-item-actions {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.todo-completed {
+  text-decoration: line-through;
+}
+.mobile {
+  color: white;
+  background-color: #333;
+}
