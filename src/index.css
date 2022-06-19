@@ -10,9 +10,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 10px;
+  background-color: #333;
+  margin-top: 2rem;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h2.rainbow-text {
+  font-size: 3rem;
+  background-image: linear-gradient(
+    -90deg,
+    #adfbda 0,
+    #35c3ff 30%,
+    #fda399 50%,
+    #76d880 70%,
+    #ebf38b 90%,
+    #adfbda 100%
+  );
+  filter: drop-shadow(0 0 2rem #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
